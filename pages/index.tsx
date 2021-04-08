@@ -5,6 +5,7 @@ import Box from "@material-ui/core/Box";
 import ProTip from "../src/ProTip";
 import Link from "../src/Link";
 import Copyright from "../src/Copyright";
+import { ExampleForm } from "../src/ExampleForm";
 
 export default function Index() {
   return (
@@ -16,6 +17,7 @@ export default function Index() {
         <Link href="/about" color="secondary">
           Go to the about page
         </Link>
+        <ExampleForm />
         <ProTip />
         <Copyright />
       </Box>
