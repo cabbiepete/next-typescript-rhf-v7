@@ -14,9 +14,18 @@ export default function Index() {
         <Typography variant="h4" component="h1" gutterBottom>
           Next.js with TypeScript + react-hook-form
         </Typography>
-        <Link href="/about" color="secondary">
-          Go to the about page
-        </Link>
+        <p>
+          This example shows reusable fields using useController specfically how
+          v7 RHF requires passing the form FieldValues type around to avoid
+          errors like
+        </p>
+        <pre>
+          Type 'Control&lt;FormFields&gt;' is not assignable to type
+          'Control&lt;FieldValues&gt;'
+        </pre>
+        <p>
+          The form below has one example controlled field with this approach
+        </p>
         <ExampleForm />
         <ProTip />
         <Copyright />
