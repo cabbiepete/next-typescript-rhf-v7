@@ -1,33 +1,41 @@
-import React from "react";
-import { useController, RegisterOptions, UseFormReturn } from "react-hook-form";
-import { TextField, TextFieldProps } from "@material-ui/core";
+import React from 'react'
+import {
+  useController,
+  RegisterOptions,
+  FieldPath,
+  Control,
+} from 'react-hook-form'
+import { TextField, TextFieldProps } from '@material-ui/core'
 
 type RHFRulesType = {
-  rules?: Omit<RegisterOptions, "valueAsNumber" | "valueAsDate" | "setValueAs">;
-};
+  rules?: Omit<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>
+}
 
-export type ControlledTextFieldProps = TextFieldProps &
-  RHFRulesType &
-  Pick<UseFormReturn, "control">;
-export const ControlledTextField = ({
+export type ControlledTextFieldProps<TFieldValues> = TextFieldProps &
+  RHFRulesType & {
+    // Pick<UseFormReturn<TFieldValues>, 'control'> &
+    name: FieldPath<TFieldValues>
+    control: Control<TFieldValues>
+  }
+export function ControlledTextField<TFieldValues>({
   control,
   name,
   rules = {
-    required: "Required"
+    required: 'Required',
   },
 
-  defaultValue = "",
+  defaultValue = '',
   ...rest
-}: ControlledTextFieldProps): JSX.Element => {
+}: ControlledTextFieldProps<TFieldValues>): JSX.Element {
   const {
     field: { ref, onChange, onBlur, value },
-    fieldState: { error }
-  } = useController({
+    fieldState: { error },
+  } = useController<TFieldValues>({
     name,
     control,
     rules,
-    defaultValue
-  });
+    defaultValue,
+  })
   return (
     <TextField
       {...rest}
@@ -40,5 +48,5 @@ export const ControlledTextField = ({
       value={value}
       required={!!rules.required}
     />
-  );
-};
+  )
+}
